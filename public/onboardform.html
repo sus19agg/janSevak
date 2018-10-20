@@ -1,0 +1,110 @@
+  <!DOCTYPE html>
+  <html lang="en" dir="ltr">
+  <head>
+    <title>JanSevak</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.jquery.com/jquery-3.3.1.js"
+    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+  </head>
+  <body>
+    <style media="screen">
+        .x{
+            margin-top: 160px;
+        }
+    </style>
+    <div class="container x">
+
+      <form>
+        <div class="form-group">
+          <label for="address">Address</label>
+          <input type="text" class="form-control" id="address">
+        </div>
+        <div class="form-group">
+          <label for="pwd">Contact No : </label>
+          <input type="text" class="form-control" id="contact">
+        </div>
+
+        <button type="button" class="btn btn-success btn-lg" id="buttonclick">Submit</button>
+      </form>
+
+    </div>
+
+    </body>
+
+  <script type="text/javascript">
+    // $(document).ready(function(){
+    //     $('#buttonclick').attr('disabled',true);
+
+    //     $('#contact').keyup(function(){
+    //         if($(this).val().length === 10){
+    //             $('#buttonclick').attr('disabled', false);
+    //         }
+    //         else
+    //         {
+    //             $('#buttonclick').attr('disabled', true);
+    //         }
+    //     });
+    //   });
+
+  $("#buttonclick").click(function(){
+    // if($("#address").val().length == 0)
+    // {
+    //   alert("Please fill the adress feild :)");
+    // }
+    // else {
+      let address = $("#address").val();
+      let contact = $("#contact").val();
+      let token = JSON.parse(localStorage.getItem('token'));
+      console.log(token);
+      console.log(address, contact);
+
+     $.ajax({
+
+    url: "https://us-central1-ts18phack.cloudfunctions.net/api/user",
+    type: "PUT",
+    data: {
+      "address": address,
+      "phone":contact
+    },
+    headers:{
+        'Content-Type':"application/x-www-form-urlencoded",
+        "Authorization":token,
+      },
+    success: function(result, status) {
+
+      console.log("query baji");
+      if(status === 'success') {
+
+        console.log(result);
+        if(result.success === true) {
+          
+
+            // redirect to onBoard page
+
+            let token = result["data"]["token"];
+            localStorage.setItem('token', JSON.stringify(token));
+
+            window.location.href = "./index.html"
+          
+        }
+      }
+      else {
+        signOut();
+        console.log("error occured while requesting");
+      }
+
+    }
+  })
+
+
+    });    
+  </script>
+
+  </html>
