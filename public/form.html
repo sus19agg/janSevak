@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>form</title>
+    </head>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.js"
+      integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+      crossorigin="anonymous"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<style media="screen">
+    .x{
+        margin-top: 160px;
+    }
+</style>
+
+
+    <body>
+
+<div class="section-form container x">
+  <form>
+    <div class="intro">
+      <h2>Register Your Complaint Here</h2>
+    </div>
+<br>
+<div class="form-group">
+    <label for="category">Category:</label>
+    <select class="form-control" id="category">
+        <option>JAL VIBHAG</option>
+        <option>BIJLI VIBHAG</option>
+        <option>SADAK VIBHAG</option>
+        <option>SADAK PARIVAHAN VIBHAG</option>
+        <option>RAIL VIBHAG</option>
+        <option>SWACHTA VIBHAG</option>
+
+      </select>
+  </div>
+
+
+
+    <textarea class="form-control" rows="3" cols="3" placeholder="Description" id="complaint"></textarea>
+    <br>
+
+    <input type="button" value="Submit" class="btn btn-lg btn-success" id="buttonclick" disabled/>
+
+  </form>
+</div>
+
+    </body>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+    $('#buttonclick').attr('disabled',true);
+
+    $('#complaint').keyup(function(){
+        if($(this).val().length !=0){
+            $('#buttonclick').attr('disabled', false);
+        }
+        else
+        {
+            $('#buttonclick').attr('disabled', true);
+        }
+    });
+});
+
+
+$("#buttonclick").click(function () {
+    // let token = localStorage.getItem("token");
+    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imd1YXJhdi5hcm9yYTdAZ21haWwuY29tIiwibmFtZSI6IkdhdXJhdiBhcm9yYSIsIm9uQm9hcmQiOmZhbHNlLCJpYXQiOjE1NDAwMzAyNDl9.enQclAug1OimOXpdJYm79aARsjAMKxBGgsqS3M8aMrA";
+    let category = $("#category option:selected").text();
+    let state = localStorage.getItem("state");
+    let district = localStorage.getItem("district");
+    let complaint = $("#complaint").val();
+    state = state.replace(/ /g,"_");
+    district = district.replace(/ /g,"_");
+    console.log(state+" "+district);
+    $.ajax({
+     type: "POST",
+     url: "https://us-central1-ts18phack.cloudfunctions.net/api/user/complaints",
+     data : {
+        "category" : category,
+        "state" : state,
+        "district" : district,
+        "complaint" : complaint
+     },
+     beforeSend: function (xhr) {
+         xhr.setRequestHeader("Authorization",token);
+     },
+     success : function(result,status){
+       if(status==="success")
+       {
+         console.log("successfully updated database");
+         // window.location.href="";
+       }
+       else {
+         console.log("some error occured");
+       }
+     }
+ });
+
+
+});
+
+
+</script>
+
+</html>

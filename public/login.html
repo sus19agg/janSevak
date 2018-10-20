@@ -6,6 +6,7 @@
 
 
 	<script src="https://apis.google.com/js/platform.js" async defer></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<meta name="google-signin-client_id" content="1032518616744-fjpudlkmjjrtu20ttjem6m2hlsdhfu46.apps.googleusercontent.com">
 </head>
 <body>
@@ -16,17 +17,72 @@
 	<script type="text/javascript">
 
 		function onSignIn(googleUser) {
-	  		var profile = googleUser.getBasicProfile();
-	  		console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-	  		console.log('Name: ' + profile.getName());
-	  		console.log('Image URL: ' + profile.getImageUrl());
-	  		console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
 
-			// console.log("googleUser --", googleUser);
+	var profile = googleUser.getBasicProfile();
+	// console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+	let userName = profile.getName();
+	// console.log('Image URL: ' + profile.getImageUrl());
+	console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
 
-			console.log("id - ",  googleUser.getAuthResponse().id_token);
-			console.log("access --", googleUser.getAuthResponse().access_token);
+	console.log(googleUser.getAuthResponse().id_token);
+
+	let token = googleUser.getAuthResponse().id_token;
+
+	$.ajax({
+
+		url: "https://us-central1-ts18phack.cloudfunctions.net/api/login",
+		type: "POST",
+		data: {
+			"idToken": token
+		},
+		success: function(result, status) {
+
+			console.log("query baji");
+			if(status === 'success') {
+
+				console.log(result);
+				if(result.success === true) {
+					
+					if(result.onBoard === false) {
+
+						// redirect to onBoard page
+
+						let token = result["data"]["token"];
+						localStorage.setItem('token', JSON.stringify(token));
+
+						window.location.href = "./onboardform.html"
+					}
+					else {
+						
+						// jwt.decode(token);
+						$('#username').val("userName");
+
+						let token = result["data"]["token"];
+						localStorage.setItem('token', JSON.stringify(token));
+
+						$('#gLogin').hide();
+						$('#gLogout').show();
+						window.location.href = "http://localhost:5000/index.html"
+					}
+				}
+			}
+			else {
+				signOut();
+				console.log("error occured while requesting");
+			}
+
 		}
+	})
+}
+
+/* <a href="#" onclick="signOut();">Sign out</a> */
+function signOut() {
+	var auth2 = gapi.auth2.getAuthInstance();
+	auth2.signOut().then(function () {
+		console.log('User signed out.');
+	});
+}
+
 
 	</script>
 
