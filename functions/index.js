@@ -526,6 +526,30 @@ function addAdmin(req, res)
 	});
 }
 
+
+function resolveAdminSide(req,res)
+{
+	let id = req.body.id;
+	let state = req.body.state;
+	let district=req.body.district;
+	let category=req.body.category;
+	let prom;
+	let tempEmail;
+	let email=req.body.email;
+	let verify;
+	prom=database.ref().child('complaints').child(state).child(district).child("SWACHTA VIBHAG").child(id).update({
+		"resolved":true
+	})
+	prom.then(()=>{
+		database.ref().child('users').child(email).child('complaints').child(id).update({
+			"resolved":true
+		})
+
+	}).catch(err => {console.log(err);})
+
+	res.json({success:true});
+}
+
 function getAdminComplaints(req, res)
 {
 	let email=req.body.email;
@@ -613,27 +637,6 @@ function getAdminComplaints(req, res)
 //
 // }
 
-function resolveAdminSide(req,res)
-{
-	let id = req.body.id;
-	let state = req.body.state;
-	let district=req.body.district;
-	let category=req.body.category;
-	let prom;
-	let tempEmail;
-	let email=req.body.email;
-	let verify;
-	prom=database.ref().child('complaints').child(state).child(district).child(category).child(id).update({
-		"resolved":true
-	})
-	prom.then(()=>{
-		database.ref().child('users').child(email).child('complaints').child(id).update({
-			"resolved":true
-		})
 
-	}).catch(err => {console.log(err);})
-
-	res.json({success:true});
-}
 
 exports.api = functions.https.onRequest(app);

@@ -27,7 +27,7 @@ let data1;
 $(window).on('load', function myfunconload() {
 
     let token=JSON.parse(localStorage.getItem('token'));
-
+	console.dir(token);
         $.ajax({
           type: "GET",
           url: "https://us-central1-ts18phack.cloudfunctions.net/api/admin/complaints",
@@ -87,7 +87,7 @@ function myFuncButton()
                'Authorization':token
                },
                data :{
-                 "state":localStorage.getItem("state") ,
+                 "state":localStorage.getItem("state"),
                  "district": localStorage.getItem("district"),
                  "category": data1[x1].category,
                  "id" : data1[x1].id,

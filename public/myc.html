@@ -18,6 +18,8 @@
 
     </head>
     <body>
+
+		
         <div id="display">
 
         </div>
@@ -92,7 +94,7 @@ function myFuncButton()
             $.ajax({
                 url: "https://us-central1-ts18phack.cloudfunctions.net/api/user/complaints",
 				data:{'state':data1[x1].state,'district':data1[x1].district,'category':data1[x1].category, 'id':data1[x1].id},
-                
+
 
                type: "PUT",
                headers: {
