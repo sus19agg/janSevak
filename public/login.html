@@ -2,6 +2,20 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.js"
+    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="new.js">
+
+    </script>
 	<title>sign in</title>
 
 
@@ -42,7 +56,7 @@
 
 				console.log(result);
 				if(result.success === true) {
-					
+
 					if(result.onBoard === false) {
 
 						// redirect to onBoard page
@@ -53,7 +67,7 @@
 						window.location.href = "./onboardform.html"
 					}
 					else {
-						
+
 						// jwt.decode(token);
 						$('#username').val("userName");
 
@@ -62,7 +76,7 @@
 
 						$('#gLogin').hide();
 						$('#gLogout').show();
-						window.location.href = "http://localhost:5000/index.html"
+						window.location.href = "./index.html"
 					}
 				}
 			}

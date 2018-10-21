@@ -1,6 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head>
+		<meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	    <script
+	    src="https://code.jquery.com/jquery-3.3.1.js"
+	    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+	    crossorigin="anonymous"></script>
+
+	    <link rel="stylesheet" href="style.css">
+	    <script src="new.js">
+
+	    </script>
         <meta charset="utf-8">
         <title>form</title>
     </head>
@@ -76,13 +90,13 @@ $(document).ready(function(){
 
 $("#buttonclick").click(function () {
     // let token = localStorage.getItem("token");
-    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imd1YXJhdi5hcm9yYTdAZ21haWwuY29tIiwibmFtZSI6IkdhdXJhdiBhcm9yYSIsIm9uQm9hcmQiOmZhbHNlLCJpYXQiOjE1NDAwMzAyNDl9.enQclAug1OimOXpdJYm79aARsjAMKxBGgsqS3M8aMrA";
+	let token = JSON.parse(localStorage.getItem('token'));
+
+	console.log(token);
     let category = $("#category option:selected").text();
     let state = localStorage.getItem("state");
     let district = localStorage.getItem("district");
     let complaint = $("#complaint").val();
-    state = state.replace(/ /g,"_");
-    district = district.replace(/ /g,"_");
     console.log(state+" "+district);
     $.ajax({
      type: "POST",
@@ -100,13 +114,15 @@ $("#buttonclick").click(function () {
        if(status==="success")
        {
          console.log("successfully updated database");
-         // window.location.href="";
+		 alert('complanit submitted successfully');
+		 setTimeout(function(){ window.location.href="./index.html"; }, 700);
        }
        else {
          console.log("some error occured");
        }
      }
  });
+
 
 
 });

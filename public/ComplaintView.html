@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+		<meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	    <script
+	    src="https://code.jquery.com/jquery-3.3.1.js"
+	    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+	    crossorigin="anonymous"></script>
+
+	    <link rel="stylesheet" href="style.css">
+	    <script src="new.js">
+
+	    </script>
+        <meta charset="utf-8">
+        <title></title>
+        <script
+          src="https://code.jquery.com/jquery-3.3.1.js"
+          integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+          crossorigin="anonymous"></script>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    </head>
+    <body>
+        <div id="display">
+
+        </div>
+    </body>
+    <script type="text/javascript">
+
+    let data1;
+    let state=localStorage.getItem('state');
+    let district=localStorage.getItem('district');
+    let category=localStorage.getItem('category');
+
+    $(window).on('load', function myfunconload() {
+        $.ajax({
+          type: "GET",
+          url: "https://us-central1-ts18phack.cloudfunctions.net/api/complaints",
+          data:{'state':state,'district':district,'category':category},
+          success : function(result,status){
+          if(status==="success")
+          {
+              console.log(result);
+              data1 = result.data.complaints;
+            let len = data1.length;
+
+            let i;
+            var v = $("<div class='list-group-item' id='x'></div>");
+            for (i=0;i<len;i++)
+            {
+                let temp=i;
+                let idStr=temp.toString();
+                let x=$("<div class='list-group-item' id="+idStr+"></div>");
+                x.append("<h2 class='list-group-item-heading'>AUTHOR: "+data1[i].author.toUpperCase()+"</h2>");
+                x.append("<p class='list-group-item'>Complaint:"+data1[i].complaint+"</p>");
+                x.append("<p class='list-group-item'>Time:"+new Date(data1[i].id)+"</p>");
+                v.append(x);
+            }
+            $("#display").append(v);
+            // myFuncButton();
+               // let stringToSend;
+             }
+           else
+           {
+             console.log("some error occured");
+           }
+         }
+    });
+
+});
+
+
+
+
+    </script>
+</html>

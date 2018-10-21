@@ -315,7 +315,7 @@ function selct_district($val)
    $(function() {
   var options = '';
   for (var i = 0; i < punjab.length; i++) {
-      options += '<option value="' + punjab[i] + '">' + napunjabgaland[i] + '</option>';
+      options += '<option value="' + punjab[i] + '">' + punjab[i] + '</option>';
   }
   $('#secondlist').html(options);
   });

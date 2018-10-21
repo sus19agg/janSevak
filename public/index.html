@@ -1,6 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.js"
+    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="new.js">
+
+    </script>
   <title>JanSevak</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,22 +44,20 @@
         <li class="active"><a href="#">Home</a></li>
         <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Select Categories<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Category 1</a></li>
-            <li><a href="#">Category 2</a></li>
-            <li><a href="#">category 3</a></li>
+            <li><a href="#">BIJLI VIBHAG</a></li>
+            <li><a href="#">JAL VIBHAG</a></li>
+            <li><a href="#">RAIL VIBHAG</a></li>
+            <li><a href="#">SADAK PARIVAHAN VIBHAG</a></li>
+            <li><a href="#">SADAK VIBHAG</a></li>
+            <li><a href="#">SWACHTA VIBHAG</a></li>
           </ul>
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
 
-        {# if not signed in #}
-        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-        {# if not signed in #}
+		  <li><a href="./login.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
 
-        {# if signed in #}
-        {# {} #}
-        <li><a href="#">My Queries</a></li>
+        <li><a href="./myc.html">My Complaints</a></li>
 
         <li id="regiCom"><a href="form.html">Register My Complaint</a></li>
         {# if signed in #}
@@ -57,7 +69,7 @@
 
       <div class="container">
         <div class="down">
-          <strong>Display</strong>
+          <b>Display</b>
           <div class="btn-group">
               <a href="#" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list">
               </span>List</a> <a href="#" id="grid" class="btn btn-default btn-sm"><span
@@ -67,113 +79,119 @@
 
 
           <div id="products" class="row list-group">
+
+            <div class="item  col-xs-4 col-lg-4">
+                <div class="thumbnail xy">
+                    <img class="group list-group-image img" src="https://1spatial.com/au/wp-content/uploads/sites/4/2018/02/Electricity_Facebook.jpg" height="450px" width="350px" />
+                    <div class="caption">
+                        <h3 class="group inner list-group-item-heading head" style="background:#505050;color:white;margin-top:3px">
+                            BIJLI VIBHAG</h3>
+
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6">
+                                <h6 class="lead" id="BIJLI VIBHAG">
+                                  <b>Resolved Complaints : </b>0<br><b>Total Complaints : </b>0  </h6>
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <button type="button" class="btn btn-primary button complaint_button" style="margin-top:40px">View Complaints</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
               <div class="item col-xs-4 col-lg-4">
                   <div class="thumbnail xy">
                       <img class="group list-group-image img" src="https://www.cleanwateraction.org/sites/default/files/images/blog/waterdrop.jpg" height="400px" width="350px" />
                       <div class="caption">
-                          <h3 class="group inner list-group-item-heading head">
+                          <h3 class="group inner list-group-item-heading head" style="background:#505050;color:white;margin-top:3px">
                               JAL VIBHAG</h3>
 
                           <div class="row">
                               <div class="col-xs-12 col-md-6">
-                                  <p class="lead" id="1">
-                                      1</p>
+                                  <h6 class="lead" id="JAL VIBHAG">
+                                      <b>Resolved Complaints : </b>0<br><b>Total Complaints : </b>0 </h6>
                               </div>
                               <div class="col-xs-12 col-md-6">
-                                  <a class="btn btn-success button" href="">View Complaints</a>
+                                  <button type="button" class="btn btn-primary button complaint_button" style="margin-top:40px">View Complaints</button>
                               </div>
                           </div>
                       </div>
                   </div>
               </div>
-              <div class="item  col-xs-4 col-lg-4">
-                  <div class="thumbnail xy">
-                      <img class="group list-group-image img" src="https://1spatial.com/au/wp-content/uploads/sites/4/2018/02/Electricity_Facebook.jpg" height="450px" width="350px" />
-                      <div class="caption">
-                          <h3 class="group inner list-group-item-heading head">
-                              BIJLI VIBHAG</h3>
 
-                          <div class="row">
-                              <div class="col-xs-12 col-md-6">
-                                  <p class="lead" id="2">
-                                      2</p>
-                              </div>
-                              <div class="col-xs-12 col-md-6">
-                                  <a class="btn btn-success button" href="">View Complaints</a>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              <div class="item  col-xs-4 col-lg-4">
-                  <div class="thumbnail xy">
-                      <img class="group list-group-image img" src="https://pakobserver.net/wp-content/uploads/2017/08/Road-Repair.jpg"  height="400px" width="350px"/>
-                      <div class="caption">
-                        <h3 class="group inner list-group-item-heading head">
-                            SADAK VIBHAG</h3>
-
-                          <div class="row">
-                              <div class="col-xs-12 col-md-6">
-                                  <p class="lead" id="3">
-                                      3</p>
-                              </div>
-                              <div class="col-xs-12 col-md-6">
-                                  <a class="btn btn-success button" href="">View Complaints</a>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              <div class="item  col-xs-4 col-lg-4">
-                  <div class="thumbnail xy">
-                      <img class="group list-group-image img" src="https://www.technobuffalo.com/wp-content/uploads/2014/05/solar-roadways-470x310@2x.jpg"  height="400px" width="350px"/>
-                      <div class="caption">
-                        <h3 class="group inner list-group-item-heading head">
-                            SADAK PARIVAHAN VIBHAG</h3>
-
-                          <div class="row">
-                              <div class="col-xs-12 col-md-6">
-                                  <p class="lead" id="4">
-                                      4</p>
-                              </div>
-                              <div class="col-xs-12 col-md-6">
-                                  <a class="btn btn-success button" href="">View Complaints</a>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
               <div class="item  col-xs-4 col-lg-4">
                   <div class="thumbnail xy">
                       <img class="group list-group-image img" src="https://s3.ap-southeast-1.amazonaws.com/images.deccanchronicle.com/dc-Cover-tk8op9atq02bph3rbhnuvjc7i2-20171022071345.Medi.jpeg"  height="400px" width="350px"/>
                       <div class="caption">
-                        <h3 class="group inner list-group-item-heading head">
+                        <h3 class="group inner list-group-item-heading head" style="background:#505050;color:white;margin-top:3px">
                             RAIL VIBHAG</h3>
                           <div class="row">
                               <div class="col-xs-12 col-md-6">
-                                  <p class="lead" id="5">
-                                      5</p>
+                                  <h6 class="lead" id="RAIL VIBHAG">
+                                      <b>Resolved Complaints : </b>0<br><b>Total Complaints : </b>0 </h6>
                               </div>
                               <div class="col-xs-12 col-md-6">
-                                  <a class="btn btn-success button" href="">View Complaints</a>
+                                  <button type="button" class="btn btn-primary button complaint_button" style="margin-top:40px">View Complaints</button>
                               </div>
                           </div>
                       </div>
                   </div>
               </div>
+
+              <div class="item  col-xs-4 col-lg-4">
+                  <div class="thumbnail xy">
+                      <img class="group list-group-image img" src="https://www.technobuffalo.com/wp-content/uploads/2014/05/solar-roadways-470x310@2x.jpg"  height="400px" width="350px"/>
+                      <div class="caption">
+                        <h3 class="group inner list-group-item-heading head" style="background:#505050;color:white;margin-top:3px">
+                          SADAK PARIVAHAN VIBHAG</h3>
+
+                          <div class="row">
+                              <div class="col-xs-12 col-md-6">
+                                  <h6 class="lead" id="SADAK PARIVAHAN VIBHAG">
+                                      <b>Resolved Complaints : </b>0<br><b>Total Complaints : </b>0 </h6>
+                              </div>
+                              <div class="col-xs-12 col-md-6">
+                                  <button type="button" class="btn btn-primary button complaint_button" style="margin-top:40px">View Complaints</button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="item  col-xs-4 col-lg-4">
+                  <div class="thumbnail xy">
+                      <img class="group list-group-image img" src="https://pakobserver.net/wp-content/uploads/2017/08/Road-Repair.jpg"  height="400px" width="350px"/>
+                      <div class="caption">
+                        <h3 class="group inner list-group-item-heading head" style="background:#505050;color:white;margin-top:3px">
+                            SADAK VIBHAG</h3>
+
+                          <div class="row">
+                              <div class="col-xs-12 col-md-6">
+                                  <h6 class="lead" id="SADAK VIBHAG">
+                                      <b>Resolved Complaints : </b>0<br><b>Total Complaints : </b>0 </h6>
+                              </div>
+                              <div class="col-xs-12 col-md-6">
+                                  <button type="button" class="btn btn-primary button complaint_button" style="margin-top:40px">View Complaints</button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
               <div class="item  col-xs-4 col-lg-4">
                   <div class="thumbnail xy">
                       <img class="group list-group-image img" src="http://theindiasaga.com/SecureSessionAuth/BlogImages/a5973eb3d810467c9b6d0090a2c35794.jpg"  height="400px" width="350px"/>
                       <div class="caption">
-                        <h3 class="group inner list-group-item-heading head">
+                        <h3 class="group inner list-group-item-heading head" style="background:#505050;color:white;margin-top:3px">
                             SWACHTA VIBHAG</h3>
                           <div class="row">
                               <div class="col-xs-12 col-md-6">
-                                  <p class="lead" id="6">
-                                      6</p>
+                                  <h6 class="lead" id="SWACHTA VIBHAG">
+                                      <b>Resolved Complaints : </b>0<br><b>Total Complaints : </b>0 </h6>
                               </div>
                               <div class="col-xs-12 col-md-6">
-                                  <a class="btn btn-success button" href="">View Complaints</a>
+                                  <button type="button" class="btn btn-primary button complaint_button" style="margin-top:40px">View Complaints</button>
                               </div>
                           </div>
                       </div>
@@ -194,30 +212,38 @@ console.log(localStorage.getItem("district"));
 
 window.onload = function() {
 
-//   $.ajax({
-//  type: "GET",
-//  url: "",
-//  data : {
-//    "state" : localStorage.getItem("state"),
-//    "district" : localStorage.getItem("district"),
-//  },
-//  success : function(result,status){
-//    if(status==="success")
-//    {
-//      let i,j;
-//      for(i=1;i<7;i++)
-//      {
-//        j=i.toString();
-//        $("#"+j)
-//      }
-//    }
-//    else {
-//      console.log("some error occured");
-//    }
-//  }
-// });
+  $.ajax({
+ type: "GET",
+ url: "https://us-central1-ts18phack.cloudfunctions.net/api/count",
+ data : {
+   "state" : localStorage.getItem("state"),
+   "district" : localStorage.getItem("district")
+ },
+ success : function(result,status){
+   if(status==="success")
+   {
+     let x;
+     console.log(result.data);
+     for (x in result.data) {
 
+    document.getElementById(x).innerHTML = "<b>Resolved Complaints : </b>"+result.data[x].resolvedCount+"<br><b>Total Complaints : </b>"+result.data[x].totalCount;
+}
+
+   }
+   else {
+     console.log("some error occured");
+   }
+ }
+});
 };
+
+
+$(".complaint_button").click(function() {
+let category = $(this).parent().parent().children(':first-child').children(':first-child').attr('id');
+localStorage.setItem("category",category);
+window.location.href="./ComplaintView.html";
+})
+
 
 </script>
 

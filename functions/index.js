@@ -24,9 +24,9 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use(cors({origin: true}));
 
 app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	next();
 });
 
 
@@ -48,6 +48,11 @@ app.put('/complaints', isAuthenticated, unsatisfied);
 app.post('/user/complaints', isAuthenticated,addUserComplaint);
 app.get('/user/complaints', isAuthenticated, myComplaints);
 app.put('/user/complaints', isAuthenticated, deleteUserComplaint)
+app.post('/user/admin', isAuthenticated, addAdmin);
+app.get('/admin/complaints', isAuthenticated, getAdminComplaints);
+
+
+app.put('/admin/complaints', isAuthenticated, resolveAdminSide);
 
 function googleLogin(req, response) {
 
@@ -280,7 +285,7 @@ function increaseCount(state,district,category)
 	return;
 }
 
-function increaseCount(state,district,category)
+function decrementCount(state,district,category)
 {
 	// let state=req.query.state;
 	// let district=req.query.district;
@@ -353,6 +358,7 @@ function addUserComplaint(req,res){
 					state:state,
 					district:district,
 					complaint:complaint,
+					resolved:false,
 				}
 				database.ref().child('users').child(email).child(complaints).child(date).set(details);
 			})
@@ -460,9 +466,19 @@ function unsatisfied(req, res)
 	let state = req.body.state;
 	let district=req.body.district;
 	let category=req.body.category;
+	let email=req.body.email;
 	console.log(id, state, category, district);
-	database.ref().child('complaints').child(state).child(district).child(category).child(id).update({
+	let prom;
+
+	prom=database.ref().child('complaints').child(state).child(district).child(category).child(id).update({
 		resolved:false
+	});
+	prom.then(()=>{
+		database.ref().child('users').child(email).child(complaints).child(id).update({
+			resolved:false
+		})
+		.catch(err => {console.log(err);})
+
 	});
 
 	res.json({
@@ -471,5 +487,153 @@ function unsatisfied(req, res)
 	})
 }
 
+
+
+
+function addAdmin(req, res)
+{
+	let category=req.body.category;
+	let district=req.body.district;
+	let state=req.body.state;
+
+
+	let email=req.body.email;
+
+	let prom;
+
+	prom=database.ref().child('admins').child(email).once('value', (snapshot)=>{
+		if(snapshot.val()!=null)
+		{
+			res.json({
+				success:false,
+				message:'already an admin'
+			});
+		}
+	})
+
+	prom.then(()=>{
+		database.ref().child('admins').child(email).set({
+			"state":state,
+			"district":district,
+			"category":category
+
+		})
+	}).catch(err => {console.log(err);})
+
+	res.json({
+		success:true,
+		message:'admin added'
+	});
+}
+
+function getAdminComplaints(req, res)
+{
+	let email=req.body.email;
+	let category;
+	let state;
+	let district;
+	let prom;
+	prom=database.ref().child('admins').child(email).once('value',(snapshot)=>{
+		if(snapshot.val()==null)
+		{
+			let temp={
+				"success": true,
+				"data": {
+					"complaints": []
+				}
+			}
+			return res.json(temp);
+		}
+		category=snapshot.val().category;
+		state=snapshot.val().state;
+		district=snapshot.val().district;
+	}).catch(err => {console.log(err);})
+	prom.then(()=>{
+		database.ref().child('complaints').child(state).child(district).child(category).once('value')
+		.then(function (snapshot) {
+
+			let userComplaints = snapshot.val();
+			console.log(userComplaints);
+			let data = {};
+			data[complaints] = new Array();
+
+			for(complaint in userComplaints) {
+
+				let obj = {};
+				data[complaints].push(userComplaints[complaint]);
+			}
+
+			return res.status(200).json({
+				success: true,
+				data: data
+			});
+		})
+		.catch(() => {
+
+			return res.status(500).json({
+				error: "error getting queries",
+				success: false
+			})
+		})
+	})
+}
+
+
+// function resolveAdminSide(req, res)
+// {
+// 	let id = req.body.id;
+// 	let state = req.body.state;
+// 	let district=req.body.district;
+// 	let category=req.body.category;
+// 	let prom;
+// 	let tempEmail;
+// 	let email;
+// 	let verify;
+// 	prom=database.ref().child('complaints').child(state).child(category).child(id).once('value',(snapshot)=>{
+// 		tempEmail=snapshot.val().email;
+// 		email=tempEmail.replace(/\./g,',');
+// 		console.log(email);
+// 	)}
+// 	prom.then(()=>{
+//
+// 		database.ref().child('users').child(email).child('complaints').child(id).update({
+// 			"resolved":true
+// 		})
+// 	}).catch(err => {console.log(err);})
+// 	database.ref().child('complaints').child(state).child(district).child(category).child(id).update({
+// 		"resolved":true
+// 	})
+//
+// 	res.json({
+// 		success:true,
+// 	});
+//
+//
+//
+//
+// }
+
+function resolveAdminSide(req,res)
+{
+	let id = req.body.id;
+	let state = req.body.state;
+	let district=req.body.district;
+	let category=req.body.category;
+	let prom;
+	let tempEmail;
+	let email=req.body.email;
+	let verify;
+	prom=database.ref().child('complaints').child(state).child(district).child(category).child(id).update({
+		"resolved":true
+	})
+	prom.then(()=>{
+		database.ref().child('users').child(email).child('complaints').child(id).update({
+			"resolved":true
+		})
+
+	}).catch(err => {console.log(err);})
+
+	res.json({success:true});
+}
 
 exports.api = functions.https.onRequest(app);
