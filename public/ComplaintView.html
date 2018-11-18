@@ -3,38 +3,66 @@
     <head>
 		<meta charset="utf-8">
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
-	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	    <script
-	    src="https://code.jquery.com/jquery-3.3.1.js"
-	    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-	    crossorigin="anonymous"></script>
 
 	    <link rel="stylesheet" href="style.css">
 	    <script src="new.js">
 
 	    </script>
         <meta charset="utf-8">
-        <title></title>
+        <title>JanSevak</title>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script
           src="https://code.jquery.com/jquery-3.3.1.js"
           integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
           crossorigin="anonymous"></script>
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-        <!-- Optional theme -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-        <!-- Latest compiled and minified JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+          <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
     </head>
 
 
 
     <body>
+
+					<nav class="navbar navbar-expand-md navbar-dark bg-dark d-none" id="boot41">
+                <div class="container-fluid">
+              <a class="navbar-brand" href="./main.html">JanSevak</a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+
+              <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link" href="./login.html" style="color:white; text-decoration:none;"><i class="fas fa-sign-in-alt"></i>&nbsp;Logout</a>
+                  </li>
+                  <li class="nav-item" style="margin-left:8px">
+                    <a class="nav-link" href="./myc.html" style="color:white; text-decoration:none;">MyComplaints</a>
+                  </li>
+                  <li class="nav-item" style="margin-left:8px">
+                    <a class="nav-link" href="./form.html" style="color:white; text-decoration:none;">Register My Complaint</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+          <nav class="navbar navbar-expand-md navbar-dark bg-dark" id="boot42">
+      <div class="container-fluid">
+    <a class="navbar-brand" href="./main.html">JanSevak</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="./login.html" style="color:white; text-decoration:none;"><i class="fas fa-sign-in-alt"></i>&nbsp;Login</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
         <div id="display">
 
         </div>
@@ -60,18 +88,23 @@
             let len = data1.length;
 
             let i;
-            var v = $("<div class='list-group-item' id='x'></div>");
             for (i=0;i<len;i++)
             {
-                let temp=i;
-                let idStr=temp.toString();
-                let x=$("<div class='list-group-item' id="+idStr+"></div>");
-                x.append("<h2 class='list-group-item-heading'>AUTHOR: "+data1[i].author.toUpperCase()+"</h2>");
-                x.append("<p class='list-group-item'>Complaint:"+data1[i].complaint+"</p>");
-                x.append("<p class='list-group-item'>Time:"+new Date(data1[i].id)+"</p>");
-                v.append(x);
+
+              var a = $("<div class='container py-3'></div>");
+              var b = $("<div class='card'></div>");
+              var header = $("<div class='card-header'></div>");
+              header.append("<h2>"+data1[i].author+"</h2>");
+              b.append(header);
+              var c = $("<div class='card-content'><div class='card-block px-3'></div></div>");
+              c.append("<br><h4>&nbsp;&nbsp;&nbsp;"+data1[i].complaint+"</h4>");
+              c.append("<hr>");
+              c.append("<h5>&nbsp;&nbsp;&nbsp;Time :&nbsp;"+new Date(data1[i].id)+"</h5>");
+              b.append(c);
+              b.append("<div class='card-footer'></div>");
+                a.append(b);
+                $("#display").append(a);
             }
-            $("#display").append(v);
             // myFuncButton();
                // let stringToSend;
              }
@@ -85,7 +118,12 @@
 });
 
 
-
+let str=JSON.parse(localStorage.getItem('token'));
+if(str!==null)
+{
+	$("#boot41").removeClass('d-none');
+	$("#boot42").addClass('d-none');
+}
 
     </script>
 </html>

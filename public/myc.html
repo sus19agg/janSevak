@@ -2,24 +2,59 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
-        <title></title>
+        <title>JanSevak</title>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script
           src="https://code.jquery.com/jquery-3.3.1.js"
           integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
           crossorigin="anonymous"></script>
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-        <!-- Optional theme -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-        <!-- Latest compiled and minified JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="./style.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
     </head>
-    <body>
 
-		
+    <body>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark d-none" id="boot41">
+    <div class="container-fluid">
+  <a class="navbar-brand" href="./main.html">JanSevak</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+    <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+      <li class="nav-item">
+        <a class="nav-link" href="./login.html" style="color:white; text-decoration:none;"><i class="fas fa-sign-in-alt"></i>&nbsp;Logout</a>
+      </li>
+      <li class="nav-item" style="margin-left:8px">
+        <a class="nav-link" href="./myc.html" style="color:white; text-decoration:none;">MyComplaints</a>
+      </li>
+      <li class="nav-item" style="margin-left:8px">
+        <a class="nav-link" href="./form.html" style="color:white; text-decoration:none;">Register My Complaint</a>
+      </li>
+    </ul>
+  </div>
+</div>
+</nav>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark" id="boot42">
+<div class="container-fluid">
+<a class="navbar-brand" href="./main.html">JanSevak</a>
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+
+<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+<li class="nav-item">
+<a class="nav-link" href="./login.html" style="color:white; text-decoration:none;"><i class="fas fa-sign-in-alt"></i>&nbsp;Login</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
         <div id="display">
 
         </div>
@@ -34,8 +69,7 @@
 	let district=localStorage.getItem("district");
 	let category=localStorage.getItem("category");
 $(window).on('load', function myfunconload() {
-    // let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imd1YXJhdi5hcm9yYTdAZ21haWwuY29tIiwibmFtZSI6IkdhdXJhdiBhcm9yYSIsIm9uQm9hcmQiOnRydWUsInBob25lIjoiOTQxNjI3MjE0MiIsImFkZHJlc3MiOiIyNTkgc2VjdG9yIDUgdXJiYW4gZXN0YXRlIGt1cnVrc2hldHJhIiwiaWF0IjoxNTQwMDg2OTUyfQ.BB0ecswFVLDhvskgUgbtXeEIlSNgK239pD9QboeH_t4";
-	// let token = localStorage.getItem("token");
+
         $.ajax({
           type: "GET",
           url: "https://us-central1-ts18phack.cloudfunctions.net/api/user/complaints",
@@ -49,24 +83,31 @@ $(window).on('load', function myfunconload() {
               data1 = result.data.complaints;
             let len = data1.length;
             let i;
-            var v = $("<div class='list-group-item' id='x'></div>");
             for (i=0;i<len;i++)
             {
+                var a = $("<div class='container py-3'></div>");
                 let temp=i;
                 let idStr=temp.toString();
-                let x=$("<div class='list-group-item' id="+idStr+"></div>");
-                x.append("<h2 class='list-group-item-heading'>"+data1[i].category+"</h2>")
-                x.append("<p class='list-group-item'>Complaint : "+data1[i].complaint+"</p>");
-                x.append("<p class='list-group-item'>Time:"+new Date(data1[i].id)+"</p>");
-                x.append("<p class='list-group-item'>Place:"+data1[i].district+", "+data1[i].state+"</p>");
+                var b = $("<div class='card'></div>");
+                var header = $("<div class='card-header' id="+idStr+"></div>");
+                header.append("<h2>"+data1[i].category+"</h2>");
+                b.append(header);
+                var c = $("<div class='card-content'><div class='card-block px-3'></div></div>");
+                c.append("<br><h4>&nbsp;&nbsp;&nbsp;"+data1[i].complaint+"</h4>");
+                c.append("<hr>");
+                c.append("<h5>&nbsp;&nbsp;&nbsp;Time :&nbsp;"+new Date(data1[i].id)+"</h5>");
+                c.append("<h5>&nbsp;&nbsp;&nbsp;Place :&nbsp;"+data1[i].district+", "+data1[i].state+"</h5>");
+                b.append(c);
+                var d = $("<div class='card-footer'></div>");
                 console.log(data1[i].resolved);
                 if(data1[i].resolved===true)
                 {
-                    x.append("<button type='button' class='btn btn-success' name='button' id='x_"+idStr+"'"+">Satisfied</button>"+" "+" "+"<button type='button' id='y_"+idStr+"'"+" class='btn btn-danger' name='button'>UnSatisfied</button>");
+                    d.append("<button type='button' class='btn btn-success' name='button' id='x_"+idStr+"'"+">Satisfied</button>"+" "+" "+"<button type='button' id='y_"+idStr+"'"+" class='btn btn-danger' name='button'>Unsatisfied</button>");
                 }
-                v.append(x);
+                b.append(d)
+                a.append(b);
+                $("#display").append(a);
             }
-            $("#display").append(v);
             myFuncButton();
                // let stringToSend;
              }
@@ -105,6 +146,7 @@ function myFuncButton()
                  if(status==="success")
                  {
                     $("#"+x1).addClass('hidden');
+                    location.reload(true);
                  }
                  else {
                      console.log("error");
@@ -127,7 +169,7 @@ function myFuncButton()
                  {
                         $("#x_"+x1).addClass('hidden');
                         $("#y_"+x1).addClass('hidden');
-
+                        location.reload(true);
                  }
                  else {
                      console.log("error");
@@ -136,6 +178,13 @@ function myFuncButton()
              });
         }
     })
+}
+
+let str=JSON.parse(localStorage.getItem('token'));
+if(str!==null)
+{
+	$("#boot41").removeClass('d-none');
+	$("#boot42").addClass('d-none');
 }
     </script>
 </html>
