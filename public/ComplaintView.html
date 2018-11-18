@@ -25,9 +25,9 @@
 
     <body>
 
-					<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+					<nav class="navbar navbar-expand-md navbar-dark bg-dark d-none" id="boot41">
                 <div class="container-fluid">
-              <a class="navbar-brand" href="./index.html">JanSevak</a>
+              <a class="navbar-brand" href="./main.html">JanSevak</a>
               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
@@ -35,18 +35,34 @@
               <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                   <li class="nav-item">
-                    <a class="nav-link" href="./searchPage.html" style="color:white; text-decoration:none;"><i class="fas fa-sign-in-alt"></i>&nbsp;Login</a>
+                    <a class="nav-link" href="./login.html" style="color:white; text-decoration:none;"><i class="fas fa-sign-in-alt"></i>&nbsp;Logout</a>
                   </li>
                   <li class="nav-item" style="margin-left:8px">
-                    <a class="nav-link" href="./login.html" style="color:white; text-decoration:none;">MyComplaints</a>
+                    <a class="nav-link" href="./myc.html" style="color:white; text-decoration:none;">MyComplaints</a>
                   </li>
                   <li class="nav-item" style="margin-left:8px">
-                    <a class="nav-link" href="./index.html#contactUs" style="color:white; text-decoration:none;">Register My Complaint</a>
+                    <a class="nav-link" href="./form.html" style="color:white; text-decoration:none;">Register My Complaint</a>
                   </li>
                 </ul>
               </div>
             </div>
           </nav>
+          <nav class="navbar navbar-expand-md navbar-dark bg-dark" id="boot42">
+      <div class="container-fluid">
+    <a class="navbar-brand" href="./main.html">JanSevak</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="./login.html" style="color:white; text-decoration:none;"><i class="fas fa-sign-in-alt"></i>&nbsp;Login</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
         <div id="display">
 
         </div>
@@ -102,7 +118,12 @@
 });
 
 
-
+let str=JSON.parse(localStorage.getItem('token'));
+if(str!==null)
+{
+	$("#boot41").removeClass('d-none');
+	$("#boot42").addClass('d-none');
+}
 
     </script>
 </html>
