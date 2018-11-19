@@ -51,6 +51,7 @@ app.put('/user/complaints', isAuthenticated, deleteUserComplaint)
 app.post('/user/admin', isAuthenticated, addAdmin);
 app.get('/admin/complaints', isAuthenticated, getAdminComplaints);
 
+app.get('/admin',isAuthenticated, getAdminCategory);
 
 app.put('/admin/complaints', isAuthenticated, resolveAdminSide);
 
@@ -526,6 +527,17 @@ function addAdmin(req, res)
 	});
 }
 
+function getAdminCategory(req, res){
+	let email=req.body.email;
+	let prom;
+	let category;
+	prom=database.ref().child('admins').child(email).once('value',(snapshot)=>{
+		category=snapshot.val().category;
+	})
+	prom.then(()=>{
+		res.json({category:category});
+	})
+}
 
 function resolveAdminSide(req,res)
 {
@@ -535,11 +547,13 @@ function resolveAdminSide(req,res)
 	let category=req.body.category;
 	let prom;
 	let tempEmail;
-	let email=req.body.email;
+	let email=req.body.author;
+	email = email.replace(/\./g, ',');
 	let verify;
-	prom=database.ref().child('complaints').child(state).child(district).child("SWACHTA VIBHAG").child(id).update({
+	console.log(id, state, district, category, email);
+	prom=database.ref().child('complaints').child(state).child(district).child(category).child(id).update({
 		"resolved":true
-	})
+	}).catch(err => {console.log(err);})
 	prom.then(()=>{
 		database.ref().child('users').child(email).child('complaints').child(id).update({
 			"resolved":true

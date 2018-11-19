@@ -1,142 +1,163 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <title>JanSevak</title>
+<head>
+	<meta charset="utf-8">
+	<title>JanSevak</title>
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <script
-          src="https://code.jquery.com/jquery-3.3.1.js"
-          integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-          crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script
+	src="https://code.jquery.com/jquery-3.3.1.js"
+	integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+	crossorigin="anonymous"></script>
 
-        <link rel="stylesheet" href="./style.css">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-
-
-    </head>
-    <body>
-      <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-            <div class="container-fluid">
-          <a class="navbar-brand" href="./main.html">JanSevak</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-
-          <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-              <li class="nav-item">
-                <a class="nav-link" href="./searchPage.html" style="color:white; text-decoration:none;"><i class="fas fa-sign-in-alt"></i>&nbsp;Login</a>
-              </li>
-              <li class="nav-item" style="margin-left:8px">
-                <a class="nav-link" href="./login.html" style="color:white; text-decoration:none;">MyComplaints</a>
-              </li>
-              <li class="nav-item" style="margin-left:8px">
-                <a class="nav-link" href="./main.html#contactUs" style="color:white; text-decoration:none;">Register My Complaint</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-        <div id="display">
-
-        </div>
-    </body>
-    <script type="text/javascript">
-let data1;
-$(window).on('load', function myfunconload() {
-
-    let token=JSON.parse(localStorage.getItem('token'));
-	console.dir(token);
-        $.ajax({
-          type: "GET",
-          url: "https://us-central1-ts18phack.cloudfunctions.net/api/admin/complaints",
-          headers: {
-          'Content-Type': "application/x-www-form-urlencoded",
-          'Authorization':token
-          },
-          success : function(result,status){
-          if(status==="success")
-          {
-              console.log(result);
-              data1 = result.data.complaints;
-            let len = data1.length;
-            // console.log(result.data.queries);
-            let i;
-            var v = $("<div class='list-group-item' id='x'></div>");
-            for (i=0;i<len;i++)
-            {
-                let temp=i;
-                let idStr=temp.toString();
+	<link rel="stylesheet" href="./style.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
 
-                var a = $("<div class='container py-3'></div>");
-                var b = $("<div class='card'></div>");
-                var header = $("<div class='card-header'></div>");
-                header.append("<h2>"+data1[i].author+"</h2>");
-                b.append(header);
-                var c = $("<div class='card-content'><div class='card-block px-3'></div></div>");
-                c.append("<br><h4>&nbsp;&nbsp;&nbsp;"+data1[i].complaint+"</h4>");
-                c.append("<hr>");
-                c.append("<h5>&nbsp;&nbsp;&nbsp;Time :&nbsp;"+new Date(data1[i].id)+"</h5>");
-                b.append(c);
+</head>
+<body>
+	<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="./main.html">JanSevak</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
 
-                var d = $("<div class='card-footer'></div>");
-                d.append("<button type='button' class='btn btn-success' name='button' id="+idStr+">Resolve</button>");
-                b.append(d);
-                  a.append(b);
-                  $("#display").append(a);
+			<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+				<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+					<li class="nav-item">
+						<a class="nav-link" href="./searchPage.html" style="color:white; text-decoration:none;"><i class="fas fa-sign-in-alt"></i>&nbsp;Login</a>
+					</li>
+					<li class="nav-item" style="margin-left:8px">
+						<a class="nav-link" href="./login.html" style="color:white; text-decoration:none;">MyComplaints</a>
+					</li>
+					<li class="nav-item" style="margin-left:8px">
+						<a class="nav-link" href="./main.html#contactUs" style="color:white; text-decoration:none;">Register My Complaint</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div id="display">
 
-            }
-            myFuncButton();
+	</div>
+</body>
+<script type="text/javascript">
+	let data1;
+	$(window).on('load', function myfunconload() {
 
-             }
+		let token=JSON.parse(localStorage.getItem('token'));
+		console.dir(token);
+		$.ajax({
+			type: "GET",
+			url: "https://us-central1-ts18phack.cloudfunctions.net/api/admin/complaints",
+			headers: {
+				'Content-Type': "application/x-www-form-urlencoded",
+				'Authorization':token
+			},
+			success : function(result,status){
+				if(status==="success")
+				{
+					console.log(result);
+					data1 = result.data.complaints;
+					let len = data1.length;
+					// console.log(result.data.queries);
+					let i;
+					var v = $("<div class='list-group-item' id='x'></div>");
+					for (i=0;i<len;i++)
+					{
+						let temp=i;
+						let idStr=temp.toString();
 
-           else
-           {
-             console.log("some error occured");
-           }
-         }
-    });
 
-});
+						var a = $("<div class='container py-3'></div>");
+						var b = $("<div class='card'></div>");
+						var header = $("<div class='card-header'></div>");
+						header.append("<h2>"+data1[i].author+"</h2>");
+						b.append(header);
+						var c = $("<div class='card-content'><div class='card-block px-3'></div></div>");
+						c.append("<br><h4>&nbsp;&nbsp;&nbsp;"+data1[i].complaint+"</h4>");
+						c.append("<hr>");
+						c.append("<h5>&nbsp;&nbsp;&nbsp;Time :&nbsp;"+new Date(data1[i].id)+"</h5>");
+						b.append(c);
+
+						var d = $("<div class='card-footer'></div>");
+						d.append("<button type='button' class='btn btn-success' name='button' id="+idStr+">Resolve</button>");
+						b.append(d);
+						a.append(b);
+						$("#display").append(a);
+
+					}
+					myFuncButton();
+
+				}
+
+				else
+				{
+					console.log("some error occured");
+				}
+			}
+		});
+
+	});
 
 
-function myFuncButton()
-{
-    $("button").click(function(){
-        var v = $(this);
-        let x1=parseInt(this.id,10);
-		console.log(data1[x1]);
-        let token=JSON.parse(localStorage.getItem('token'));
-        $.ajax({
+	function myFuncButton()
+	{
+		$("button").click(function(){
+			var v = $(this);
+			let x1=parseInt(this.id,10);
+			console.log(data1[x1]);
+			let token=JSON.parse(localStorage.getItem('token'));
+			let category="";
+			$.ajax({
+				url: "https://us-central1-ts18phack.cloudfunctions.net/api/admin",
+				type: "GET",
+				headers: {
+					'Content-Type': "application/x-www-form-urlencoded",
+					'Authorization':token
+				},
+				success: function(result,status){
+					if(status==="success")
+					{
+						console.log(result);
+						category=result.category;
+						$.ajax({
 
-                url: "https://us-central1-ts18phack.cloudfunctions.net/api/admin/complaints",
-               type: "PUT",
-               headers: {
-               'Content-Type': "application/x-www-form-urlencoded",
-               'Authorization':token
-               },
-               data :{
-                 "state":localStorage.getItem("state"),
-                 "district": localStorage.getItem("district"),
-                 "category": data1[x1].category,
-                 "id" : data1[x1].id,
-               },
-               success: function(result,status){
-                 if(status==="success")
-                 {
-                     console.log(result);
-                     v.val("pending confirmation...");
-                     v.attr("disabled", true);
-                 }
-                 else {
-                     console.log("error");
-                 }
-               }
-             });
-        })
-}
-    </script>
+							url: "https://us-central1-ts18phack.cloudfunctions.net/api/admin/complaints",
+							type: "PUT",
+							headers: {
+								'Content-Type': "application/x-www-form-urlencoded",
+								'Authorization':token
+							},
+							data :{
+								"state":localStorage.getItem("state"),
+								"district": localStorage.getItem("district"),
+								"category": category,
+								"id" : data1[x1].id,
+								"author":data1[x1].author
+							},
+							success: function(result,status){
+								if(status==="success")
+								{
+									console.log(result);
+									v.val("pending confirmation...");
+									v.innerHTML="pending confirmation...";
+									v.attr("disabled", true);
+								}
+								else {
+									console.log("error");
+								}
+							}
+						});
+					}
+					else {
+						console.log("error");
+					}
+				}
+			});
+		})
+	}
+</script>
 </html>
