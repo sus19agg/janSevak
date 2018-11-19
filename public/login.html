@@ -26,36 +26,49 @@
 	<meta name="google-signin-client_id" content="1032518616744-fjpudlkmjjrtu20ttjem6m2hlsdhfu46.apps.googleusercontent.com">
 </head>
 <body>
+	<nav class="navbar navbar-expand-md navbar-dark bg-dark d-none" id="boot41">
+<div class="container-fluid">
+<a class="navbar-brand" href="./main.html">JanSevak</a>
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
 
-	<nav class="navbar navbar-expand-md navbar-dark bg-dark">
-				<div class="container-fluid">
-			<a class="navbar-brand" href="./index.html">JanSevak</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
+<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+  <li class="nav-item">
+	<a class="nav-link" href="./login.html" style="color:white; text-decoration:none;"><i class="fas fa-sign-in-alt"></i>&nbsp;Logout</a>
+  </li>
+  <li class="nav-item" style="margin-left:8px">
+	<a class="nav-link" href="./myc.html" style="color:white; text-decoration:none;">MyComplaints</a>
+  </li>
+  <li class="nav-item" style="margin-left:8px">
+	<a class="nav-link" href="./form.html" style="color:white; text-decoration:none;">Register My Complaint</a>
+  </li>
+</ul>
+</div>
+</div>
+</nav>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark" id="boot42">
+<div class="container-fluid">
+<a class="navbar-brand" href="./main.html">JanSevak</a>
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
 
-			<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-				<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-					<li class="nav-item">
-						<a class="nav-link" href="./login.html" style="color:white; text-decoration:none;"><i class="fas fa-sign-in-alt"></i>&nbsp;Login</a>
-					</li>
-					<li class="nav-item" style="margin-left:8px">
-						<a class="nav-link" href="./myc.html" style="color:white; text-decoration:none;">MyComplaints</a>
-					</li>
-					<li class="nav-item" style="margin-left:8px">
-						<a class="nav-link" href="./form.html" style="color:white; text-decoration:none;">Register My Complaint</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-
-
+<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+<li class="nav-item">
+<a class="nav-link" href="./login.html" style="color:white; text-decoration:none;"><i class="fas fa-sign-in-alt"></i>&nbsp;Login</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
 	<div class="container">
 
-		<h1 style="color:white; margin-top:140px;margin-left:34.4%;">Welcome to BRIDGE.</h1><br>
+		<h1 style="color:white; margin-top:140px;margin-left:34.4%;">Welcome to JanSevak.</h1><br>
 				<div id="user" class="d-none" style="text-align: center; margin-top: 10px">
-					<h2 style='color: white;'></h2>
+					<h2 style='color: white;margin-left:5%;'></h2>
 				</div>
 				<div id="login"  style="margin-top:3%;margin-left:40%">
 					<!-- sign in button -->
@@ -63,7 +76,7 @@
 					<div id="my-signin2"></div>
 				</div>
 
-				<div  id="logged" style="margin-left:42%; margin-top:2%;">
+				<div  id="logged" style="margin-left:39.35%; margin-top:2%;" class="d-none">
 					<button id="profile" class="btn btn-primary">Register Complaint</button>&nbsp;
 					<button onclick="signOut()" class="btn btn-danger">Sign Out</button>
 				</div>
@@ -93,11 +106,22 @@
 		// setUpPage(name);
 		console.log(name);
 		console.log($("#user"));
-		$("#user").removeClass("d-none");
 		console.log($("#user"));
 		$("#user").children('h2').html("Hi "+ name+ "!" );
+		//location.reload(true);
+		$("#user").removeClass("d-none");
+
 		localStorage.setItem('userName', name);
 		console.log(localStorage.getItem('userName'));
+		$("#logged").removeClass("d-none");
+
+
+
+			$("#boot41").removeClass('d-none');
+			$("#boot42").addClass('d-none');
+
+
+		// location.reload();
 
 		requestFirebase(token);
 	    }
@@ -157,11 +181,13 @@ function requestFirebase(token) {
 						$('#username').val("userName");
 						let jwttoken = result["data"]["token"];
 						localStorage.setItem('token', JSON.stringify(jwttoken));
-
-						$('#gLogin').hide();
-						$('#gLogout').show();
-					//	window.location.href = "./index.html"
+						//
+						// $('#gLogin').hide();
+						// $('#gLogout').show();
+						 //location.reload(true);
+					//	window.location.href = "./main.html"
 					}
+					// location.reload(true);
 				}
 			}
 			else {
@@ -178,16 +204,24 @@ function requestFirebase(token) {
 
 
 function signOut() {
+
 	var auth2 = gapi.auth2.getAuthInstance();
 	auth2.signOut().then(function () {
 		console.log('User signed out.');
-
+		localStorage.removeItem('token');
 		$('#logged').hide();
 		$('#user').hide();
+		location.reload(true);
 	});
 }
 
 
+// let str=JSON.parse(localStorage.getItem('token'));
+// if(str!==null)
+// {
+// 	$("#boot41").removeClass('d-none');
+// 	$("#boot42").addClass('d-none');
+// }
 	</script>
 
 <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
